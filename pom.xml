@@ -54,7 +54,7 @@
             <artifactId>remark</artifactId>
             <version>1.0.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/remark-1.0.0-SNAPSHOT.jar</systemPath>
+            <systemPath>${project.basedir}/src/main/lib/remark-1.0.0-SNAPSHOT.jar</systemPath>
         </dependency>
     </dependencies>
 
