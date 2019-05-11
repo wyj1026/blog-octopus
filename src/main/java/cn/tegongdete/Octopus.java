@@ -39,8 +39,7 @@ public class Octopus {
             target.get(platform).addAll(c);
         }
         else {
-            List<String> ids = new ArrayList<String>();
-            ids.addAll(c);
+            List<String> ids = new ArrayList<>(c);
             target.put(platform, ids);
         }
     }
