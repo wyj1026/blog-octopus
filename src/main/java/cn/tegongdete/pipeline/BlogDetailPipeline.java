@@ -1,6 +1,6 @@
 package cn.tegongdete.pipeline;
 
-import cn.tegongdete.entity.Blog;
+import cn.tegongdete.Blog;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cn.tegongdete.config.SpiderConfig;
 import org.slf4j.Logger;

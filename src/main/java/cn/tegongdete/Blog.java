@@ -1,4 +1,4 @@
-package cn.tegongdete.entity;
+package cn.tegongdete;
 
 import java.sql.Timestamp;
 
