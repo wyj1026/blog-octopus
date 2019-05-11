@@ -1,6 +1,5 @@
 package cn.tegongdete.resolver;
 
-import cn.tegongdete.entity.JueJinListRequestResult;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
@@ -73,5 +72,36 @@ public class JueJinListPageResolver implements Resolver {
             end++;
         }
         return url.substring(start, end);
+    }
+
+
+    private class JueJinListRequestResult {
+        private int count;
+        private List<String> postUrls;
+        private String lastPostCreatedTime;
+
+        public int getCount() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
+        }
+
+        public List<String> getPostUrls() {
+            return postUrls;
+        }
+
+        public void setPostUrls(List<String> postUrls) {
+            this.postUrls = postUrls;
+        }
+
+        public String getLastPostCreatedTime() {
+            return lastPostCreatedTime;
+        }
+
+        public void setLastPostCreatedTime(String lastPostCreatedTime) {
+            this.lastPostCreatedTime = lastPostCreatedTime;
+        }
     }
 }
