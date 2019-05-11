@@ -1,0 +1,45 @@
+{
+  "csdn": {
+    "titlePath": "//h1[@class=title-article]/html()",
+    "authorPath": "//a[@class=follow-nickName]/html()",
+    "datePath": "//div[@class=article-bar-top]/span[@class=time]/html()",
+    "contentPath": "//div[@id=content_views]/html()",
+    "tagPath": "//span[@class=artic-tag-box]/a[@class=tag-link]/html()",
+    "listPath": "//div[@class=csdn-tracking-statistics]//h4//a//@href"
+  },
+  "cnblogs": {
+    "titlePath": "//a[@id=cb_post_title_url]/html()",
+    "authorPath": "//div[@class=postDesc]/a[1]/html()",
+    "datePath": "//span[@id=post-date]/html()",
+    "contentPath": "//div[@id=cnblogs_post_body]/html()",
+    "tagPath": "//div[@id=EntryTag]/a/html()",
+    "listPath": "//div[@class=postTitle]//a//@href"
+  },
+  "jianshu": {
+    "titlePath": "//h1[@class=title]/html()",
+    "authorPath": "//div[@class=author]//span[@class=name]//a/html()",
+    "datePath": "//div[@class=author]//span[@class=publish-time]/html()",
+    "contentPath": "//div[@class=show-content-free]/html()",
+    "tagPath": "//div[@class=show-foot]//span/html()",
+    "listPath": "//a[@class=title]//@href",
+    "headers": {
+      "x-infinitescroll": "true"
+    }
+  },
+  "segmentfault": {
+    "titlePath": "//h1[@id=articleTitle]//a/html()",
+    "authorPath": "//a[@class=mr5]//strong/html()",
+    "datePath": "//div[@class=article__authorright]/span/html()",
+    "contentPath": "//div[@class='article fmt article__content']/html()",
+    "tagPath": "//a[@class=tag]/html()",
+    "listPath": "//a[@class=profile-mine__content--title]//@href"
+  },
+  "juejin": {
+    "titlePath": "//h1[@class=article-title]/html()",
+    "authorPath": "//meta[@itemprop=name]/@content",
+    "datePath": "//time/html()",
+    "contentPath": "//div[@class=article-content]/html()",
+    "tagPath": "//div[@class=tag-title]/html()",
+    "listPath": "DISABLED"
+  }
+}
