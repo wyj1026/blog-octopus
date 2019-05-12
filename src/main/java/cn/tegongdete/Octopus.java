@@ -4,6 +4,7 @@ import cn.tegongdete.config.SpiderConfig;
 import cn.tegongdete.config.SpiderConfigFactory;
 import cn.tegongdete.downloader.HttpClientDownloader;
 import cn.tegongdete.enums.BlogPlatform;
+import cn.tegongdete.enums.Field;
 import cn.tegongdete.pipeline.BlogPipeline;
 import cn.tegongdete.processor.BlogProcessor;
 import org.slf4j.Logger;
@@ -23,7 +24,7 @@ public class Octopus {
         return this;
     }
 
-    public void add(BlogPlatform platform, String id) {
+    public Octopus add(BlogPlatform platform, String id) {
         if (target.containsKey(platform)) {
             target.get(platform).add(id);
         }
@@ -32,9 +33,10 @@ public class Octopus {
             ids.add(id);
             target.put(platform, ids);
         }
+        return this;
     }
 
-    public void add(BlogPlatform platform, Collection<String> c) {
+    public Octopus add(BlogPlatform platform, Collection<String> c) {
         if (target.containsKey(platform)) {
             target.get(platform).addAll(c);
         }
@@ -42,6 +44,11 @@ public class Octopus {
             List<String> ids = new ArrayList<>(c);
             target.put(platform, ids);
         }
+        return this;
+    }
+
+    public Octopus field(Field field) {
+        return this;
     }
 
     public static Octopus fromSingle(BlogPlatform platform, String id) {
@@ -96,6 +103,10 @@ public class Octopus {
         //BlogPlatform.JIANSHU, "44a252a62ec6"
         //BlogPlatform.JUEJIN, "5c3d35ef6fb9a04a09564a6d"
         Octopus octopus = Octopus.fromSingle(BlogPlatform.CSDN, "lonely_fireworks").threadPerSite(1);
+        //Map<BlogPlatform, Collection<String>> all = new HashMap<>();
+        //all.put(BlogPlatform.CSDN, Arrays.asList("lonely_fireworks", "so", "on"));
+        //all.put(BlogPlatform.BOKEYUAN, Arrays.asList("binyue"));
+        //Octopus octopus = Octopus.fromMap(all);
         octopus.start();
     }
 }
