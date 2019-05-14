@@ -2,6 +2,7 @@ package cn.tegongdete;
 
 import cn.tegongdete.config.SpiderConfig;
 import cn.tegongdete.config.SpiderConfigFactory;
+import cn.tegongdete.converter.DateConverter;
 import cn.tegongdete.downloader.HttpClientDownloader;
 import cn.tegongdete.enums.BlogPlatform;
 import cn.tegongdete.pipeline.BlogPipeline;
@@ -93,15 +94,18 @@ public class Octopus {
     }
 
     public static void main(String[] args) {
-        //BlogPlatform.CSDN, "lonely_fireworks"
-        //BlogPlatform.BOKEYUAN, "binyue"
-        //BlogPlatform.JIANSHU, "44a252a62ec6"
-        //BlogPlatform.JUEJIN, "5c3d35ef6fb9a04a09564a6d"
-        Octopus octopus = Octopus.fromSingle(BlogPlatform.CSDN, "lonely_fireworks").threadPerSite(1);
+        //Octopus octopus = Octopus.fromSingle(BlogPlatform.CSDN, "lonely_fireworks").threadPerSite(1);
+        //Octopus octopus = Octopus.fromSingle(BlogPlatform.BOKEYUAN, "binyue").threadPerSite(1);
+        //Octopus octopus = Octopus.fromSingle(BlogPlatform.JIANSHU, "44a252a62ec6").threadPerSite(1);
+        //Octopus octopus = Octopus.fromSingle(BlogPlatform.JUEJIN, "5c3d35ef6fb9a04a09564a6d").threadPerSite(1);
+        //Octopus octopus = Octopus.fromSingle(BlogPlatform.SEGMENTFAULT, "conardli").threadPerSite(1);
+
         //Map<BlogPlatform, Collection<String>> all = new HashMap<>();
         //all.put(BlogPlatform.CSDN, Arrays.asList("lonely_fireworks", "so", "on"));
         //all.put(BlogPlatform.BOKEYUAN, Arrays.asList("binyue"));
         //Octopus octopus = Octopus.fromMap(all);
-        octopus.start();
+        //octopus.start();
+
+        //System.out.println(DateConverter.convert("2小时前", BlogPlatform.SEGMENTFAULT));
     }
 }

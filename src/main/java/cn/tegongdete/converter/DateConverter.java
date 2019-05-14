@@ -2,17 +2,19 @@ package cn.tegongdete.converter;
 
 import cn.tegongdete.enums.BlogPlatform;
 
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 public class DateConverter {
     private static final long OneDayMillis = 86400000;
     public static Timestamp convert(String raw, BlogPlatform platform) {
-        return new Timestamp(System.currentTimeMillis());
-        /*
+        System.out.println(raw);
         Timestamp result;
         if (mightBeDaysBefore(platform) && isDaysBefore(raw)) {
-            int daysBefore = Integer.valueOf(raw.substring(0, countNum(raw)));
-            result = new Timestamp(System.currentTimeMillis() - daysBefore * OneDayMillis);
+            long millisBefore = Integer.valueOf(raw.substring(0, countNum(raw)))  * millisPerTimeUnit(raw);
+            result = new Timestamp(System.currentTimeMillis() - millisBefore);
         }
         else {
             int year, month, date, hour, minute, second;
@@ -26,7 +28,6 @@ public class DateConverter {
             result = new Timestamp(year, month, date, hour, minute, second, 0);
         }
         return result;
-        */
     }
 
     private static boolean mightBeDaysBefore(BlogPlatform blogPlatform) {
@@ -49,12 +50,28 @@ public class DateConverter {
 
     private static String getPureInt(String s) {
         char[] r = new char[14];
+        Arrays.fill(r, '0');
         int index = 0;
         for (char c: s.toCharArray()) {
             if (c >= '0' && c <= '9') {
                 r[index++] = c;
             }
         }
-        return r.toString();
+        return String.valueOf(r);
+    }
+
+    private static long millisPerTimeUnit(String raw) {
+        for (char c: raw.toCharArray()) {
+            if (c == '天') {
+                return TimeUnit.DAYS.toMillis(1);
+            }
+            else if (c == '小') {
+                return TimeUnit.HOURS.toMillis(1);
+            }
+            else if (c == '分'){
+                return TimeUnit.MINUTES.toMillis(1);
+            }
+        }
+        return 0;
     }
 }
