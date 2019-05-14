@@ -11,6 +11,15 @@ public class SpiderConfig {
     private String initialUrl;
     private Map<String, String> headers;
     private boolean enableListResolver;
+    private CommonConfig commonConfig;
+
+    public CommonConfig getCommonConfig() {
+        return commonConfig;
+    }
+
+    public void setCommonConfig(CommonConfig commonConfig) {
+        this.commonConfig = commonConfig;
+    }
 
     public Boolean isEnableListResolver() {
         return enableListResolver;

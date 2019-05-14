@@ -1,8 +1,8 @@
 package cn.tegongdete;
 
+import cn.tegongdete.config.CommonConfig;
 import cn.tegongdete.config.SpiderConfig;
 import cn.tegongdete.config.SpiderConfigFactory;
-import cn.tegongdete.converter.DateConverter;
 import cn.tegongdete.downloader.HttpClientDownloader;
 import cn.tegongdete.enums.BlogPlatform;
 import cn.tegongdete.pipeline.BlogPipeline;
@@ -16,6 +16,7 @@ import java.util.*;
 public class Octopus {
     private static final Logger logger = LoggerFactory.getLogger(Octopus.class);
     private static final HttpClientDownloader downloader = new HttpClientDownloader();
+    private final CommonConfig commonConfig = new CommonConfig();
     private Map<BlogPlatform, List<String>> target = new HashMap<>();
     private int threadPerSite = 1;
 
@@ -27,8 +28,7 @@ public class Octopus {
     public Octopus add(BlogPlatform platform, String id) {
         if (target.containsKey(platform)) {
             target.get(platform).add(id);
-        }
-        else {
+        } else {
             List<String> ids = new ArrayList<String>();
             ids.add(id);
             target.put(platform, ids);
@@ -39,11 +39,36 @@ public class Octopus {
     public Octopus add(BlogPlatform platform, Collection<String> c) {
         if (target.containsKey(platform)) {
             target.get(platform).addAll(c);
-        }
-        else {
+        } else {
             List<String> ids = new ArrayList<>(c);
             target.put(platform, ids);
         }
+        return this;
+    }
+
+    public Octopus format2Markdown() {
+        this.commonConfig.setDefault(false);
+        this.commonConfig.setToMarkdown(true);
+        return this;
+    }
+
+    public Octopus toConsole() {
+        this.commonConfig.setDefault(false);
+        this.commonConfig.setToConsole(true);
+        return this;
+    }
+
+    public Octopus toBean(Collection<Blog> c) {
+        this.commonConfig.setDefault(false);
+        this.commonConfig.setToBean(true);
+        this.commonConfig.setResultSaver(c);
+        return this;
+    }
+
+    public Octopus toPDF(String path) {
+        this.commonConfig.setDefault(false);
+        this.commonConfig.setToPDF(true);
+        this.commonConfig.setPath(path);
         return this;
     }
 
@@ -61,15 +86,15 @@ public class Octopus {
 
     public static Octopus fromMap(Map<BlogPlatform, Collection<String>> m) {
         Octopus octopus = new Octopus();
-        for (Map.Entry<BlogPlatform, Collection<String>> entry: m.entrySet()) {
+        for (Map.Entry<BlogPlatform, Collection<String>> entry : m.entrySet()) {
             octopus.add(entry.getKey(), entry.getValue());
         }
         return octopus;
     }
 
     public void start() {
-        for (Map.Entry<BlogPlatform, List<String>> entry: target.entrySet()) {
-            for (String id: entry.getValue()) {
+        for (Map.Entry<BlogPlatform, List<String>> entry : target.entrySet()) {
+            for (String id : entry.getValue()) {
                 execute(entry.getKey(), id);
             }
         }
@@ -80,17 +105,14 @@ public class Octopus {
             throw new NullPointerException("Blog id cannot be null");
         }
         SpiderConfig config = SpiderConfigFactory.getConfig(id, platform);
-        if (config != null) {
-            BlogPipeline pipeline = new BlogPipeline(config);
-            Spider.create(new BlogProcessor(config))
-                    .addUrl(config.getInitialUrl())
-                    .addPipeline(pipeline).thread(threadPerSite)
-                    .setDownloader(downloader)
-                    .run();
-        }
-        else {
-            throw new NullPointerException("Couldn't get config");
-        }
+        Objects.requireNonNull(config, "Can't get config!");
+        config.setCommonConfig(commonConfig);
+        BlogPipeline pipeline = new BlogPipeline(config);
+        Spider.create(new BlogProcessor(config))
+                .addUrl(config.getInitialUrl())
+                .addPipeline(pipeline).thread(threadPerSite)
+                .setDownloader(downloader)
+                .run();
     }
 
     public static void main(String[] args) {

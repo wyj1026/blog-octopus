@@ -7,6 +7,7 @@ blog octopus是一个稳定、高性能、支持多平台的博客抓取工具�
 ## Features
   * 多平台支持：简书、博客园、CSDN、掘金、SegmentFault
   * 多种输出方式：html、markdown(TODO: pdf)
+  * 准确的时间转换
   
 ## Quick Start
 
@@ -31,6 +32,7 @@ blog octopus是一个稳定、高性能、支持多平台的博客抓取工具�
   ```
   
   ### 2、指定抓取内容
+  
   ### 3、获取抓取结果
   * 1
   * 2
