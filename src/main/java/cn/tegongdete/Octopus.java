@@ -4,7 +4,6 @@ import cn.tegongdete.config.SpiderConfig;
 import cn.tegongdete.config.SpiderConfigFactory;
 import cn.tegongdete.downloader.HttpClientDownloader;
 import cn.tegongdete.enums.BlogPlatform;
-import cn.tegongdete.enums.Field;
 import cn.tegongdete.pipeline.BlogPipeline;
 import cn.tegongdete.processor.BlogProcessor;
 import org.slf4j.Logger;
@@ -44,10 +43,6 @@ public class Octopus {
             List<String> ids = new ArrayList<>(c);
             target.put(platform, ids);
         }
-        return this;
-    }
-
-    public Octopus field(Field field) {
         return this;
     }
 
