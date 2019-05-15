@@ -2,15 +2,12 @@ package cn.tegongdete.converter;
 
 import cn.tegongdete.enums.BlogPlatform;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class DateConverter {
-    private static final long OneDayMillis = 86400000;
     public static Timestamp convert(String raw, BlogPlatform platform) {
-        System.out.println(raw);
         Timestamp result;
         if (mightBeDaysBefore(platform) && isDaysBefore(raw)) {
             long millisBefore = Integer.valueOf(raw.substring(0, countNum(raw)))  * millisPerTimeUnit(raw);

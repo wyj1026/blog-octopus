@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Spider;
 
+import java.io.File;
 import java.util.*;
 
 public class Octopus {
@@ -65,9 +66,9 @@ public class Octopus {
         return this;
     }
 
-    public Octopus toPDF(String path) {
+    public Octopus toFile(String path) {
         this.commonConfig.setDefault(false);
-        this.commonConfig.setToPDF(true);
+        this.commonConfig.setToFile(true);
         this.commonConfig.setPath(path);
         return this;
     }
@@ -116,18 +117,14 @@ public class Octopus {
     }
 
     public static void main(String[] args) {
-        //Octopus octopus = Octopus.fromSingle(BlogPlatform.CSDN, "lonely_fireworks").threadPerSite(1);
         //Octopus octopus = Octopus.fromSingle(BlogPlatform.BOKEYUAN, "binyue").threadPerSite(1);
         //Octopus octopus = Octopus.fromSingle(BlogPlatform.JIANSHU, "44a252a62ec6").threadPerSite(1);
         //Octopus octopus = Octopus.fromSingle(BlogPlatform.JUEJIN, "5c3d35ef6fb9a04a09564a6d").threadPerSite(1);
         //Octopus octopus = Octopus.fromSingle(BlogPlatform.SEGMENTFAULT, "conardli").threadPerSite(1);
+        List<Blog> l = new ArrayList<Blog>();
+        Octopus octopus = Octopus.fromSingle(BlogPlatform.CSDN, "lonely_fireworks").threadPerSite(1);
+        octopus.toBean(l);
+        octopus.start();
 
-        //Map<BlogPlatform, Collection<String>> all = new HashMap<>();
-        //all.put(BlogPlatform.CSDN, Arrays.asList("lonely_fireworks", "so", "on"));
-        //all.put(BlogPlatform.BOKEYUAN, Arrays.asList("binyue"));
-        //Octopus octopus = Octopus.fromMap(all);
-        //octopus.start();
-
-        //System.out.println(DateConverter.convert("2小时前", BlogPlatform.SEGMENTFAULT));
     }
 }

@@ -31,10 +31,19 @@ blog octopus是一个稳定、高性能、支持多平台的博客抓取工具�
   octopus.start();
   ```
   
-  ### 2、指定抓取内容
-  
-  ### 3、获取抓取结果
-  * 1
-  * 2
+  ### 2、获取抓取结果
+  * 1 保存到集合中
+  ```
+  List<Blog> l = new ArrayList<Blog>();
+  Octopus octopus = Octopus.fromSingle(BlogPlatform.CSDN, "lonely_fireworks").threadPerSite(1);
+  octopus.toBean(l);
+  octopus.start();
+  ```
+  * 2 保存到文件夹中（markdown格式）
+  ```
+   Octopus octopus = Octopus.fromSingle(BlogPlatform.CSDN, "lonely_fireworks").threadPerSite(1);
+   octopus.toFile("./test/");
+   octopus.start();
+```
   
   

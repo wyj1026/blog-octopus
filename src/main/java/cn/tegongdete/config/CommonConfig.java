@@ -10,7 +10,16 @@ public class CommonConfig {
     private boolean toMarkdown;
     private boolean toConsole;
     private boolean toBean;
-    private boolean toPDF;
+
+    public boolean isToFile() {
+        return toFile;
+    }
+
+    public void setToFile(boolean toFile) {
+        this.toFile = toFile;
+    }
+
+    private boolean toFile;
     private String path;
     private Collection<Blog> resultSaver;
 
@@ -60,13 +69,5 @@ public class CommonConfig {
 
     public void setToBean(boolean toBean) {
         this.toBean = toBean;
-    }
-
-    public boolean isToPDF() {
-        return toPDF;
-    }
-
-    public void setToPDF(boolean toPDF) {
-        this.toPDF = toPDF;
     }
 }
