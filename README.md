@@ -1,4 +1,4 @@
-# Blog OCTOPUS
+# Blog Octopus
 
 ## About
 
